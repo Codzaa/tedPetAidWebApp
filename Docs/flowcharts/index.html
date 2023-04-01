@@ -27,8 +27,20 @@
     B ----> |"Create New User"| D
     D ----> |"Error Creating new user"| B
 
+</pre>
 
+<h1>Book Appointment</h1>
 
+<pre class="mermaid">
+
+    graph TD
+    X["Book Page"] ----> |"Click on the Sign Up Button"| B["Sign Up Page"]
+    X["Auth Page"] ----> |"Click on the Login Button"| A["Login Page"]
+    A ----> |"User Enter's Credentials"| D[(Database)]
+    D ----> |"Wrong User Credentials"| A
+    D ----> |"Correct User Credentials"| C["Home Page"]
+    B ----> |"Create New User"| D
+    D ----> |"Error Creating new user"| B
 
 </pre>
 
