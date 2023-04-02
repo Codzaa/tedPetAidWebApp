@@ -22,52 +22,68 @@ class _signUpUIState extends State<signUpUI> {
   TextEditingController cityController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController sexController = TextEditingController();
-  TextEditingController selfiePicController = TextEditingController();
   TextEditingController ageController = TextEditingController();
-  TextEditingController housePicController = TextEditingController();
-  TextEditingController petShelterPicController = TextEditingController();
 
   //
   late String selfieFileUrl;
 
   //
-  late List<File> housePicFiles;
+  late String houseFileUrl;
 
   //
-  bool imagesLoaded = false;
+  late String petShelterFileUrl;
 
+  //
+  bool selfieLoaded = false;
+  bool housePicLoaded = false ;
+  bool petShelterLoaded = false;
+
+  // Function called when selfie button is pressed
   void pickSelfie() async {
 
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-
     if (image!= null) {
       selfieFileUrl = image.path;
-      imagesLoaded = true;
+      selfieLoaded = true;
       setState(() {});
     } else {
       // User canceled the picker
     }
 
-
-
   }
 
-  //
-  void pickHousePics() async{
+  // Function called when selfie button is pressed
+  void pickHousePic() async {
 
-    //
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: true,
-        type: FileType.image
-    );
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    //
-    if (result != null) {
-      housePicFiles = result.paths.map((path) => File(path!)).toList();
+    if (image!= null) {
+      houseFileUrl = image.path;
+      housePicLoaded = true;
+      setState(() {});
     } else {
       // User canceled the picker
     }
+
+  }
+  // Function called when selfie button is pressed
+  void pickPetShelter() async {
+
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (image!= null) {
+      petShelterFileUrl = image.path;
+      petShelterLoaded = true;
+      setState(() {});
+    } else {
+      // User canceled the picker
+    }
+
+  }
+
+
+  void signUp(){
 
   }
 
@@ -77,7 +93,24 @@ class _signUpUIState extends State<signUpUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Sign Up"),
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: TextButton(onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // Navigate the user to the Home page
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please fill input')),
+                    );
+                  }
+                },child:const Text("Submit",style: TextStyle(color: Colors.white),))
+              )
+          ),
+        ],
       ),
       body: ListView(
         children: [
@@ -221,11 +254,39 @@ class _signUpUIState extends State<signUpUI> {
                       ),
                     ),
                   ),
-
-                  imagesLoaded ? Image.network(
+                  selfieLoaded ? Image.network(
                       selfieFileUrl,
-                  ): const SizedBox()
-
+                  ): const SizedBox(),
+                  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
+                    child: Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          pickHousePic();
+                        },
+                        child: const Text('Choose House Picture'),
+                      ),
+                    ),
+                  ),
+                  housePicLoaded ? Image.network(
+                    houseFileUrl,
+                  ): const SizedBox(),
+                  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
+                    child: Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          pickPetShelter();
+                        },
+                        child: const Text('Choose House Picture'),
+                      ),
+                    ),
+                  ),
+                  petShelterLoaded ? Image.network(
+                    petShelterFileUrl
+                  ): const SizedBox(),
                 ],
               ),
             ),

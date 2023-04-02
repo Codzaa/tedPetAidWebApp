@@ -17,7 +17,7 @@ class MyUserModelAdapter extends TypeAdapter<MyUserModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MyUserModel(
-      id1: fields[0] as String,
+      id: fields[0] as String,
       username: fields[1] as String,
       password: fields[2] as String,
       name: fields[3] as String,
@@ -38,7 +38,7 @@ class MyUserModelAdapter extends TypeAdapter<MyUserModel> {
     writer
       ..writeByte(13)
       ..writeByte(0)
-      ..write(obj.id1)
+      ..write(obj.id)
       ..writeByte(1)
       ..write(obj.username)
       ..writeByte(2)
@@ -95,7 +95,7 @@ class MyPetModelAdapter extends TypeAdapter<MyPetModel> {
       selfiePic2: fields[5] as String,
       diet: fields[6] as String,
       age: fields[7] as String,
-      ownerId: fields[8] as String,
+      ownerUserName: fields[8] as String,
       passedAway: fields[9] as String,
     );
   }
@@ -121,7 +121,7 @@ class MyPetModelAdapter extends TypeAdapter<MyPetModel> {
       ..writeByte(7)
       ..write(obj.age)
       ..writeByte(8)
-      ..write(obj.ownerId)
+      ..write(obj.ownerUserName)
       ..writeByte(9)
       ..write(obj.passedAway);
   }
@@ -149,7 +149,7 @@ class MyScheduleModelAdapter extends TypeAdapter<MyScheduleModel> {
     };
     return MyScheduleModel(
       id: fields[0] as String,
-      ownerId: fields[1] as String,
+      ownerUserName: fields[1] as String,
       monday: fields[2] as String,
       tuesday: fields[3] as String,
       wednesday: fields[4] as String,
@@ -167,7 +167,7 @@ class MyScheduleModelAdapter extends TypeAdapter<MyScheduleModel> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.ownerId)
+      ..write(obj.ownerUserName)
       ..writeByte(2)
       ..write(obj.monday)
       ..writeByte(3)
@@ -207,36 +207,33 @@ class MyTemporaryCarerModelAdapter extends TypeAdapter<MyTemporaryCarerModel> {
     };
     return MyTemporaryCarerModel(
       id: fields[0] as String,
-      carerId: fields[1] as String,
-      petId: fields[2] as String,
-      days: (fields[3] as Map).cast<String, dynamic>(),
-      carerSelfiePic: fields[4] as String,
-      petSelfiePic: fields[5] as String,
-      petName: fields[6] as String,
-      carerName: fields[7] as String,
+      days: (fields[1] as Map).cast<String, dynamic>(),
+      carerSelfiePic: fields[2] as String,
+      petSelfiePic: fields[3] as String,
+      petName: fields[4] as String,
+      carerUserName: fields[5] as String,
+      ownerUserName: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, MyTemporaryCarerModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.carerId)
-      ..writeByte(2)
-      ..write(obj.petId)
-      ..writeByte(3)
       ..write(obj.days)
-      ..writeByte(4)
+      ..writeByte(2)
       ..write(obj.carerSelfiePic)
-      ..writeByte(5)
+      ..writeByte(3)
       ..write(obj.petSelfiePic)
-      ..writeByte(6)
+      ..writeByte(4)
       ..write(obj.petName)
-      ..writeByte(7)
-      ..write(obj.carerName);
+      ..writeByte(5)
+      ..write(obj.carerUserName)
+      ..writeByte(6)
+      ..write(obj.ownerUserName);
   }
 
   @override

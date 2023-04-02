@@ -6,7 +6,7 @@ part 'mymodels.g.dart';
 class MyUserModel {
   //-
   @HiveField(0)
-  String id1;
+  String id;
   @HiveField(1)
   String username;
   @HiveField(2)
@@ -33,7 +33,7 @@ class MyUserModel {
   String hasPets;
 
   MyUserModel({
-    required this.id1,
+    required this.id,
     required this.username,
     required this.password,
     required this.name,
@@ -57,6 +57,8 @@ class MyPetModel {
   @HiveField(0)
   String id;
   @HiveField(1)
+  //When Quering and saving the pet to the database we will use :
+  // PetName + ownerUserName
   String name;
   @HiveField(2)
   String type;
@@ -71,7 +73,7 @@ class MyPetModel {
   @HiveField(7)
   String age;
   @HiveField(8)
-  String ownerId;
+  String ownerUserName;
   @HiveField(9)
   String passedAway;
 
@@ -84,7 +86,7 @@ class MyPetModel {
     required this.selfiePic2,
     required this.diet,
     required this.age,
-    required this.ownerId,
+    required this.ownerUserName,
     required this.passedAway,
   });
 //-
@@ -97,7 +99,7 @@ class MyScheduleModel {
   @HiveField(0)
   String id;
   @HiveField(1)
-  String ownerId;
+  String ownerUserName;
   @HiveField(2)
   String monday;
   @HiveField(3)
@@ -115,7 +117,7 @@ class MyScheduleModel {
 
   MyScheduleModel({
     required this.id,
-    required this.ownerId,
+    required this.ownerUserName,
     required this.monday,
     required this.tuesday,
     required this.wednesday,
@@ -134,29 +136,26 @@ class MyTemporaryCarerModel {
   @HiveField(0)
   String id;
   @HiveField(1)
-  String carerId;
-  @HiveField(2)
-  String petId;
-  @HiveField(3)
   Map<String, dynamic> days;
-  @HiveField(4)
+  @HiveField(2)
   String carerSelfiePic;
-  @HiveField(5)
+  @HiveField(3)
   String petSelfiePic;
-  @HiveField(6)
+  @HiveField(4)
   String petName;
-  @HiveField(7)
-  String carerName;
+  @HiveField(5)
+  String carerUserName;
+  @HiveField(6)
+  String ownerUserName;
 
   MyTemporaryCarerModel({
     required this.id,
-    required this.carerId,
-    required this.petId,
     required this.days,
     required this.carerSelfiePic,
     required this.petSelfiePic,
     required this.petName,
-    required this.carerName
+    required this.carerUserName,
+    required this.ownerUserName
   });
 //-
 }
