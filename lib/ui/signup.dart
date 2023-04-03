@@ -4,6 +4,11 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:petmutualaid/models/mymodels.dart';
+import 'package:petmutualaid/services/authservice.dart';
+import 'package:petmutualaid/services/constants.dart';
+import 'package:petmutualaid/ui/home.dart';
+import 'package:petmutualaid/ui/login.dart';
 
 class signUpUI extends StatefulWidget {
   const signUpUI({Key? key}) : super(key: key);
@@ -15,7 +20,7 @@ class signUpUI extends StatefulWidget {
 class _signUpUIState extends State<signUpUI> {
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController nationalIdController = TextEditingController();
@@ -25,13 +30,13 @@ class _signUpUIState extends State<signUpUI> {
   TextEditingController ageController = TextEditingController();
 
   //
-  late String selfieFileUrl;
+  String selfieFileUrl = "";
 
   //
-  late String houseFileUrl;
+  String houseFileUrl = "";
 
   //
-  late String petShelterFileUrl;
+  String petShelterFileUrl = "";
 
   //
   bool selfieLoaded = false;
@@ -85,6 +90,50 @@ class _signUpUIState extends State<signUpUI> {
 
   void signUp(){
 
+    //
+    debugPrint("Can Sign Up....");
+    MyUserModel myUser = MyUserModel(
+        id: "",
+        username: usernameController.text,
+        password: passwordController.text,
+        name: nameController.text,
+        nationalId: nationalIdController.text,
+        city: cityController.text,
+        address: addressController.text,
+        sex1: sexController.text,
+        selfiePic: selfieFileUrl,
+        age: ageController.text,
+        housePic: houseFileUrl,
+        petSpacePic: petShelterFileUrl,
+        hasPets: "NO");
+    // Try to Sign Up
+    String result = signUpF(myUser);
+    // If sign up is successful
+    if(result == globalSuccessMsg){
+      // Re-route to Home-Page
+      // Navigator.of(context).push(MaterialPageRoute(builder: ((context) => MyProfileUI())));
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: ((context)=> const HomeUI())), (route) => false);
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result)),
+      );
+    }
+  }
+
+  // Function/Method to check if the Pictures have been uploaded
+  bool checkPicturesF(){
+
+    //
+    if(selfieFileUrl != ""){
+      if(houseFileUrl != ""){
+        if(petShelterFileUrl != ""){
+            return true;
+        }
+      }
+    }
+
+    //
+    return false;
   }
 
 
@@ -98,10 +147,25 @@ class _signUpUIState extends State<signUpUI> {
           Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: GestureDetector(
+                  onTap: () {},
+                  child: TextButton(onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: ((context)=> const loginUI())), (route) => false);
+                  },child:const Text("GO TO LOGIN",style: TextStyle(color: Colors.white),))
+              )
+          ),
+          Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
                 onTap: () {},
                 child: TextButton(onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Navigate the user to the Home page
+                      if(checkPicturesF()){
+                        signUp();
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Please Upload Pictures')),
+                        );
+                      }
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Please fill input')),
@@ -125,7 +189,7 @@ class _signUpUIState extends State<signUpUI> {
                     padding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
-                      controller: emailController,
+                      controller: usernameController,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(), labelText: "Email"),
                       validator: (value) {
@@ -141,7 +205,7 @@ class _signUpUIState extends State<signUpUI> {
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
                       controller: passwordController,
-                      obscureText: true,
+                      obscureText: false,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(), labelText: "Password"),
                       validator: (value) {
