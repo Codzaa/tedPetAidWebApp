@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:petmutualaid/models/mymodels.dart';
 import 'package:petmutualaid/ui/pets/services/crud_pets.dart';
 
@@ -24,7 +25,7 @@ class _AllPetsUIState extends State<AllPetsUI> {
   @override
   void initState() {
     ///
-    getAllPetsFF();
+    getAllPetsF();
     ///
     super.initState();
     ///
@@ -32,6 +33,19 @@ class _AllPetsUIState extends State<AllPetsUI> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(),
+      body: MasonryGridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 4,
+          crossAxisSpacing: 4,
+          itemCount: pets.length,
+          itemBuilder: (BuildContext context,int index){
+            return GestureDetector(
+              onTap: (){},
+              child: Image.memory(pets[index].selfiePic));
+          }
+      )
+    );
   }
 }

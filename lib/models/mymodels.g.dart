@@ -24,11 +24,11 @@ class MyUserModelAdapter extends TypeAdapter<MyUserModel> {
       nationalId: fields[4] as String,
       city: fields[5] as String,
       address: fields[6] as String,
-      sex1: fields[7] as String,
-      selfiePic: fields[8] as String,
+      sex: fields[7] as String,
+      selfiePic: fields[8] as Uint8List,
       age: fields[9] as String,
-      housePic: fields[10] as String,
-      petSpacePic: fields[11] as String,
+      housePic: fields[10] as Uint8List,
+      petSpacePic: fields[11] as Uint8List,
       hasPets: fields[12] as String,
     );
   }
@@ -52,7 +52,7 @@ class MyUserModelAdapter extends TypeAdapter<MyUserModel> {
       ..writeByte(6)
       ..write(obj.address)
       ..writeByte(7)
-      ..write(obj.sex1)
+      ..write(obj.sex)
       ..writeByte(8)
       ..write(obj.selfiePic)
       ..writeByte(9)
@@ -91,8 +91,8 @@ class MyPetModelAdapter extends TypeAdapter<MyPetModel> {
       name: fields[1] as String,
       type: fields[2] as String,
       sex: fields[3] as String,
-      selfiePic: fields[4] as String,
-      selfiePic2: fields[5] as String,
+      selfiePic: fields[4] as Uint8List,
+      selfiePic2: fields[5] as Uint8List,
       diet: fields[6] as String,
       age: fields[7] as String,
       ownerUserName: fields[8] as String,

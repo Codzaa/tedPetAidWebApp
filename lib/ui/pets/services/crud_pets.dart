@@ -1,5 +1,6 @@
 
 
+import 'package:flutter/material.dart';
 import 'package:petmutualaid/models/mymodels.dart';
 import 'package:petmutualaid/services/constants.dart';
 import 'package:petmutualaid/services/localdb.dart';
@@ -9,9 +10,9 @@ String addPetFF(MyPetModel myPet){
   ///
   var uuid = const Uuid();
   /// Create Pet name
-  myPet.name ="${myPet.name}_${UserC.globalUser!.username}";
+  String name ="${myPet.name}(${UserC.globalUser!.username})";
   /// Check if pet already exists
-  bool result = checkPet(myPet.name);
+  bool result = checkPet(name);
   ///
   if(result){
     ///
@@ -21,9 +22,13 @@ String addPetFF(MyPetModel myPet){
   /// Create an Id
   myPet.id = uuid.v4();
   /// Create Pet name
-  myPet.name ="${myPet.name}_${UserC.globalUser!.username}";
+  myPet.name ="${myPet.name}(${UserC.globalUser!.username})";
+  /// Add OwnerUserName
+  myPet.ownerUserName = UserC.globalUser!.username;
   /// Add Pet to Database
   LocalDbC.myPetsBox.put(myPet.name,myPet);
+  ///
+
   ///
   return globalSuccessMsg;
   ///
@@ -35,10 +40,10 @@ bool checkPet(petName){
   ///
   if(myPet == null){
     ///
-    return true;
+    return false;
   }
   ///
-  return false;
+  return true;
 }
 ///
 String editPet(MyPetModel myPet){
@@ -57,8 +62,10 @@ List<MyPetModel> fetchUserPetsF(){
   ///
   while (it.moveNext()) {
     ///
-    if(it.current.owerUsername == UserC.globalUser!.username){
+    debugPrint(it.current.ownerUserName);
+    if(it.current.ownerUserName == UserC.globalUser!.username){
       ///
+
       myPets.add(it.current);
       ///
     }
@@ -75,12 +82,9 @@ List<MyPetModel> getAllPetsFF(){
   ///
   while (it.moveNext()) {
     ///
-    if (it.current.owerUsername == UserC.globalUser!.username) {
-      ///
-      allPets.add(it.current);
-      ///
-    }
+    allPets.add(it.current);
     ///
+    debugPrint(it.current.name);
   }
   ///
   return allPets;

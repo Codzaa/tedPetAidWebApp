@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petmutualaid/models/mymodels.dart';
@@ -22,9 +24,9 @@ class _AddPetUIState extends State<AddPetUI> {
   TextEditingController ageController = TextEditingController();
   TextEditingController ownerUsernameController = TextEditingController();
   ///
-  String selfieFileUrl = "";
+  Uint8List selfieFileUrl  = Uint8List(128);
   ///
-  String selfie2FileUrl = "";
+  Uint8List selfie2FileUrl  = Uint8List(128);
   ///
   bool selfieLoaded = false;
   ///
@@ -35,7 +37,9 @@ class _AddPetUIState extends State<AddPetUI> {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     ///
     if (image!= null) {
-      selfieFileUrl = image.path;
+      //adapter.storeImage(imageBytes);
+      ///
+      selfieFileUrl = await image.readAsBytes();
       selfieLoaded = true;
       setState(() {});
     } else {
@@ -48,7 +52,7 @@ class _AddPetUIState extends State<AddPetUI> {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     ///
     if (image!= null) {
-      selfie2FileUrl = image.path;
+      selfie2FileUrl = await image.readAsBytes();
       selfie2Loaded = true;
       setState(() {});
     } else {
@@ -76,7 +80,11 @@ class _AddPetUIState extends State<AddPetUI> {
     // If sign up is successful
     if(result == globalSuccessMsg){
       // Re-route to My Pets Page
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: ((context)=> const MyPetsUI())), (route) => false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result)),
+      );
+      //
+      Navigator.of(context).pop();
     }else{
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(result)),
@@ -87,8 +95,8 @@ class _AddPetUIState extends State<AddPetUI> {
   // Function/Method to check if the Pictures have been uploaded
   bool checkPicturesF(){
     ///
-    if(selfieFileUrl != ""){
-      if(selfie2FileUrl != ""){
+    if(selfieFileUrl != []){
+      if(selfie2FileUrl != []){
         return true;
       }
     }
@@ -189,7 +197,7 @@ class _AddPetUIState extends State<AddPetUI> {
                       ),
                     ),
                   ),
-                  selfieLoaded ? Image.network(
+                  selfieLoaded ? Image.memory(
                     selfieFileUrl,
                   ): const SizedBox(),
                   Padding(
@@ -204,7 +212,7 @@ class _AddPetUIState extends State<AddPetUI> {
                       ),
                     ),
                   ),
-                 selfie2Loaded ? Image.network(
+                 selfie2Loaded ? Image.memory(
                     selfie2FileUrl,
                   ): const SizedBox(),
                 ],

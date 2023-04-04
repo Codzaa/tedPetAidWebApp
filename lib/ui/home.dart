@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petmutualaid/services/constants.dart';
 import 'package:petmutualaid/ui/pets/add_pet.dart';
 import 'package:petmutualaid/ui/pets/all_pets.dart';
+import 'package:petmutualaid/ui/pets/my_pets.dart';
 
 class HomeUI extends StatefulWidget {
   const HomeUI({Key? key}) : super(key: key);
@@ -24,11 +25,7 @@ class _HomeUIState extends State<HomeUI> {
     ///
     AllPetsUI(),
     ///
-    AddPetUI(),
-    ///
-    AddPetUI(),
-    ///
-    AddPetUI()
+    MyPetsUI(),
   ];
   ///
   @override
@@ -48,7 +45,7 @@ class _HomeUIState extends State<HomeUI> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
-            label: 'Pets',
+            label: 'My Pets',
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(

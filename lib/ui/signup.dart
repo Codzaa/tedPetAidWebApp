@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -28,28 +29,23 @@ class _signUpUIState extends State<signUpUI> {
   TextEditingController addressController = TextEditingController();
   TextEditingController sexController = TextEditingController();
   TextEditingController ageController = TextEditingController();
-
-  //
-  String selfieFileUrl = "";
-
-  //
-  String houseFileUrl = "";
-
-  //
-  String petShelterFileUrl = "";
-
-  //
+  ///
+  Uint8List selfieFileUrl = Uint8List(128);
+  ///
+  Uint8List houseFileUrl = Uint8List(128);
+  ///
+  Uint8List petShelterFileUrl = Uint8List(128);
+  ///
   bool selfieLoaded = false;
   bool housePicLoaded = false ;
   bool petShelterLoaded = false;
-
-  // Function called when selfie button is pressed
+  /// Function called when selfie button is pressed
   void pickSelfie() async {
-
+    ///
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-
+    ///
     if (image!= null) {
-      selfieFileUrl = image.path;
+      selfieFileUrl = await image.readAsBytes();
       selfieLoaded = true;
       setState(() {});
     } else {
@@ -64,7 +60,7 @@ class _signUpUIState extends State<signUpUI> {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (image!= null) {
-      houseFileUrl = image.path;
+      houseFileUrl = await image.readAsBytes();
       housePicLoaded = true;
       setState(() {});
     } else {
@@ -78,7 +74,7 @@ class _signUpUIState extends State<signUpUI> {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (image!= null) {
-      petShelterFileUrl = image.path;
+      petShelterFileUrl = await image.readAsBytes();
       petShelterLoaded = true;
       setState(() {});
     } else {
@@ -100,7 +96,7 @@ class _signUpUIState extends State<signUpUI> {
         nationalId: nationalIdController.text,
         city: cityController.text,
         address: addressController.text,
-        sex1: sexController.text,
+        sex: sexController.text,
         selfiePic: selfieFileUrl,
         age: ageController.text,
         housePic: houseFileUrl,
@@ -318,7 +314,7 @@ class _signUpUIState extends State<signUpUI> {
                       ),
                     ),
                   ),
-                  selfieLoaded ? Image.network(
+                  selfieLoaded ? Image.memory(
                       selfieFileUrl,
                   ): const SizedBox(),
                   Padding(
@@ -333,7 +329,7 @@ class _signUpUIState extends State<signUpUI> {
                       ),
                     ),
                   ),
-                  housePicLoaded ? Image.network(
+                  housePicLoaded ? Image.memory(
                     houseFileUrl,
                   ): const SizedBox(),
                   Padding(
@@ -348,7 +344,7 @@ class _signUpUIState extends State<signUpUI> {
                       ),
                     ),
                   ),
-                  petShelterLoaded ? Image.network(
+                  petShelterLoaded ? Image.memory(
                     petShelterFileUrl
                   ): const SizedBox(),
                 ],

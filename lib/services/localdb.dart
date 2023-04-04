@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:petmutualaid/models/mymodels.dart';
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 class LocalDbC {
 
@@ -47,11 +48,21 @@ class LocalDbC {
     debugPrint("Opened Boxes");
     ///
     dummyUsers();
+    ///
+    dummyPets();
+    ///
   }
   ///Create Dummy Users
-  static dummyUsers(){
+  static dummyUsers() async{
     ///
     var uuid = const Uuid();
+    ///
+    ///
+    http.Response response = await http.get(
+      Uri.parse('https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'),
+    );
+    ///
+    var selfiePic = response.bodyBytes;
     ///
     MyUserModel user1 = MyUserModel(
         id: uuid.v4(),
@@ -61,11 +72,11 @@ class LocalDbC {
         nationalId: "nationalId1",
         city: "Ville Heaven",
         address: "45 Tree Avenue",
-        sex1: "male",
-        selfiePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        sex: "male",
+        selfiePic: selfiePic,
         age: "30",
-        housePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-        petSpacePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        housePic: selfiePic,
+        petSpacePic: selfiePic,
         hasPets: "NO"
     );
     ///
@@ -77,11 +88,11 @@ class LocalDbC {
         nationalId: "nationalId2",
         city: "Ville Heaven",
         address: "45 Tree Avenue",
-        sex1: "male",
-        selfiePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        sex: "male",
+        selfiePic: selfiePic,
         age: "30",
-        housePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-        petSpacePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        housePic: selfiePic,
+        petSpacePic: selfiePic,
         hasPets: "NO"
     );
     ///
@@ -93,11 +104,11 @@ class LocalDbC {
         nationalId: "nationalId3",
         city: "Ville Heaven",
         address: "45 Tree Avenue",
-        sex1: "male",
-        selfiePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        sex: "male",
+        selfiePic: selfiePic,
         age: "38",
-        housePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-        petSpacePic: "https://images.unsplash.com/photo-1557002665-c552e1832483?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        housePic: selfiePic,
+        petSpacePic: selfiePic,
         hasPets: "NO"
     );
     ///
@@ -115,4 +126,57 @@ class LocalDbC {
     ///
   }
   ///
+  static dummyPets() async{
+    ///
+    var uuid = const Uuid();
+    ///
+    String petName ="Scooby(James)";
+    ///
+    http.Response response = await http.get(
+      Uri.parse('https://images.unsplash.com/photo-1577474810446-650b0d0e561b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80'),
+    );
+    ///
+    var selfiePic1 = response.bodyBytes;
+    ///
+    MyPetModel pet1 = MyPetModel(
+        id: uuid.v4(),
+        name: petName,
+        type: "Dog",
+        sex: "Male",
+        selfiePic: selfiePic1,
+        selfiePic2: selfiePic1,
+        diet: "Biscuits",
+        age: "2 years",
+        ownerUserName: "James",
+        passedAway: "NO"
+    );
+    ///
+    petName ="Rex(Moses)";
+    ///
+    MyPetModel pet2 = MyPetModel(
+        id: uuid.v4(),
+        name: petName,
+        type: "Dog",
+        sex: "Male",
+        selfiePic: selfiePic1,
+        selfiePic2: selfiePic1,
+        diet: "Jelly Babies",
+        age: "5 years",
+        ownerUserName: "Moses",
+        passedAway: "NO"
+    );
+    ///
+    try{
+      ///
+      myPetsBox.put(pet1.name, pet1);
+      ///
+      myPetsBox.put(pet2.name, pet2);
+      ///
+    } catch(e){
+      ///
+      debugPrint("DUM STUFF 2");
+    }
+
+
+  }
 }

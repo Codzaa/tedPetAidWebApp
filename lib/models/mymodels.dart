@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:hive/hive.dart';
 
 part 'mymodels.g.dart';
@@ -20,15 +22,15 @@ class MyUserModel {
   @HiveField(6)
   String address;
   @HiveField(7)
-  String sex1;
+  String sex;
   @HiveField(8)
-  String selfiePic;
+  Uint8List selfiePic;
   @HiveField(9)
   String age;
   @HiveField(10)
-  String housePic;
+  Uint8List housePic;
   @HiveField(11)
-  String petSpacePic;
+  Uint8List petSpacePic;
   @HiveField(12)
   String hasPets;
 
@@ -40,7 +42,7 @@ class MyUserModel {
     required this.nationalId,
     required this.city,
     required this.address,
-    required this.sex1,
+    required this.sex,
     required this.selfiePic,
     required this.age,
     required this.housePic,
@@ -65,9 +67,9 @@ class MyPetModel {
   @HiveField(3)
   String sex;
   @HiveField(4)
-  String selfiePic;
+  Uint8List selfiePic;
   @HiveField(5)
-  String selfiePic2;
+  Uint8List selfiePic2;
   @HiveField(6)
   String diet;
   @HiveField(7)
