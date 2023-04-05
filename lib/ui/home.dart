@@ -26,7 +26,16 @@ class _HomeUIState extends State<HomeUI> {
     AllPetsUI(),
     ///
     MyPetsUI(),
+
+    // BEGIN TODO
+    /// AvailUI (),
+    /// MySchedule (),
+    /// Dates (),
+    /// MyProfile ()
+    // END TODO
+    
   ];
+
   ///
   @override
   Widget build(BuildContext context) {
