@@ -161,3 +161,40 @@ class MyTemporaryCarerModel {
   });
 //-
 }
+
+
+// BEGIN TO DO
+
+/*
+
+///
+@HiveType(typeId: 4)
+class MyDateModel {
+  //-
+  @HiveField(0)
+  String id;
+  @HiveField(1)
+  String day;
+  @HiveField(2)
+  String carerUsername;
+  @HiveField(3)
+  String ownerUsername;
+  @HiveField(4)
+  String petName;
+  @HiveField(5)
+  String location
+
+  MyTemporaryCarerModel({
+    required this.id,
+    required this.day,
+    required this.carerUsername,
+    required this.ownerUsername,
+    required this.petName,
+    required this.carerUserName,
+    required this.location
+  });
+//-
+}
+*/
+
+// END TO DO
