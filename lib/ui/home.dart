@@ -27,9 +27,8 @@ class _HomeUIState extends State<HomeUI> {
     AllPetsUI(),
     ///
     MyPetsUI(),
-    ///
-    AllCarersUI()
   ];
+
   ///
   @override
   Widget build(BuildContext context) {
