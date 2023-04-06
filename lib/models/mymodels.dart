@@ -116,6 +116,8 @@ class MyScheduleModel {
   String saturday;
   @HiveField(8)
   String sunday;
+  @HiveField(9)
+  bool isAvailable;
 
   MyScheduleModel({
     required this.id,
@@ -126,7 +128,8 @@ class MyScheduleModel {
     required this.thursday,
     required this.friday,
     required this.saturday,
-    required this.sunday
+    required this.sunday,
+    required this.isAvailable
   });
 //-
 }

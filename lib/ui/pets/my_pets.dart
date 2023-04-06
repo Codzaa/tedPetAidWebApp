@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:petmutualaid/models/mymodels.dart';
 import 'package:petmutualaid/ui/pets/add_pet.dart';
+import 'package:petmutualaid/ui/pets/pet_profile.dart';
 import 'package:petmutualaid/ui/pets/services/crud_pets.dart';
 
 class MyPetsUI extends StatefulWidget {
@@ -53,11 +54,16 @@ class _MyPetsUIState extends State<MyPetsUI> {
             itemBuilder: (BuildContext context,int index){
               return GestureDetector(
                   onTap: (){},
-                  child: Column(
-                    children: [
-                      Text(pets[index].name),
-                      Image.memory(pets[index].selfiePic),
-                    ],
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => PetProfileUI(myPet: pets[index])));
+                    },
+                    child: Column(
+                      children: [
+                        Text(pets[index].name),
+                        Image.memory(pets[index].selfiePic),
+                      ],
+                    ),
                   ));
             }
         )

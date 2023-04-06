@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petmutualaid/services/constants.dart';
+import 'package:petmutualaid/ui/carers/all_carers.dart';
 import 'package:petmutualaid/ui/pets/add_pet.dart';
 import 'package:petmutualaid/ui/pets/all_pets.dart';
 import 'package:petmutualaid/ui/pets/my_pets.dart';
@@ -26,6 +27,8 @@ class _HomeUIState extends State<HomeUI> {
     AllPetsUI(),
     ///
     MyPetsUI(),
+    ///
+    AllCarersUI()
   ];
   ///
   @override

@@ -90,7 +90,15 @@ List<MyPetModel> getAllPetsFF(){
   return allPets;
 }
 ///
-///
+String petBelongsTo(MyPetModel myPet){
+  ///
+  if(myPet.ownerUserName != UserC.globalUser!.username){
+    ///
+    return "Nope";
+  }
+  ///
+  return globalSuccessMsg;
+}
 ///
 ///
 ///
