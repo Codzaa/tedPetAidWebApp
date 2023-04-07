@@ -40,6 +40,8 @@ class _MyScheduleUIState extends State<MyScheduleUI> {
     ///
     mySchedule = getUserScheduleFF();
     ///
+    debugPrint(mySchedule.monday);
+    ///
     if(mySchedule.monday == booked){
       dayColourMonday = Colors.teal[600];
     }

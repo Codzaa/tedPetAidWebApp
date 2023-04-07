@@ -17,7 +17,7 @@ String signUpF(
   if (result){
     return "User Already Exists";
   }
-  // Generate User Id
+  /// Generate User Id
   myUser.id = uuid.v1();
   /// Save the User to the Database
   LocalDbC.myUsersBox.put(myUser.username, myUser);

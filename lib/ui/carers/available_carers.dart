@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:petmutualaid/models/mymodels.dart';
+import 'package:petmutualaid/ui/carers/carer_schedule.dart';
 import 'package:petmutualaid/ui/carers/services/crud_carers.dart';
 
 class AvailCarersUI extends StatefulWidget {
@@ -30,6 +31,7 @@ class _AvailCarersUIState extends State<AvailCarersUI> {
     super.initState();
     ///
   }
+  ///
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,10 +45,18 @@ class _AvailCarersUIState extends State<AvailCarersUI> {
               return GestureDetector(
                   onTap: (){
                     /// Carer Schedule
-                    
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => CarerSchedUI(carer: people[index])));
                     ///
                   },
-                  child: Image.memory(people[index].selfiePic));
+                  child: Column(
+                    children: [
+                      Text(people[index].name),
+                      Image.memory(people[index].selfiePic),
+                    ],
+                  ));
             }
         )
     );

@@ -82,7 +82,11 @@ class _CarerSchedUIState extends State<CarerSchedUI> {
     Navigator.push(
       context, 
       MaterialPageRoute(
-        builder: (BuildContext context) => AddDateUI(carerSched: carerSched!)
+        builder: (BuildContext context) => AddDateUI(
+          carerProfile: widget.carer,
+          carerSched: carerSched!,
+          day: day,
+          )
       )
     );
     ///
@@ -100,7 +104,7 @@ class _CarerSchedUIState extends State<CarerSchedUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: gotCarer ? Column() : GridView.count(
+      body: gotCarer ? GridView.count(
             primary: false,
             padding: const EdgeInsets.all(20),
             crossAxisSpacing: 3,
@@ -277,7 +281,7 @@ class _CarerSchedUIState extends State<CarerSchedUI> {
                 ),
               ),
             ],
-          ),
+          ) : Column(),
     );
   }
 }

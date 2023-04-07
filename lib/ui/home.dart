@@ -3,6 +3,7 @@ import 'package:petmutualaid/services/constants.dart';
 import 'package:petmutualaid/ui/carers/all_carers.dart';
 import 'package:petmutualaid/ui/carers/available_carers.dart';
 import 'package:petmutualaid/ui/carers/my_schedule.dart';
+import 'package:petmutualaid/ui/dates/my_dates.dart';
 import 'package:petmutualaid/ui/pets/add_pet.dart';
 import 'package:petmutualaid/ui/pets/all_pets.dart';
 import 'package:petmutualaid/ui/pets/my_pets.dart';
@@ -46,9 +47,9 @@ class _HomeUIState extends State<HomeUI> {
     /// These page has 4 sub pages in the form of tabs.
     /// 1st Tab shows HOME dates
     /// 2nd Tab shows AWAY dates
-    /// DatesUI(),
+    MyDatesUI(),
     /// Shows current logged in user's Profile
-    /// MyProfile ()
+    /// MyProfile (),
     /// 
     MyPetsUI(),
     ///
@@ -73,6 +74,11 @@ class _HomeUIState extends State<HomeUI> {
           BottomNavigationBarItem(
             icon: Icon(Icons.schedule),
             label: 'Schedule',
+            backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Pet Dates',
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(

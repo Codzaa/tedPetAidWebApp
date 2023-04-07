@@ -31,9 +31,13 @@ List<MyUserModel> getAvailableCarersFF(){
     ///
     if(it2.current.isAvailable){
       ///
-      scheds.add(it2.current);
-      ///
-      carers.add(LocalDbC.myUsersBox.get(it2.current.ownerUserName));
+      if(it2.current.ownerUserName != UserC.globalUser!.username){
+        ///
+        scheds.add(it2.current);
+        ///
+        carers.add(LocalDbC.myUsersBox.get(it2.current.ownerUserName));
+        ///
+      }
       ///
     }
   ///  
@@ -46,6 +50,8 @@ List<MyUserModel> getAvailableCarersFF(){
 MyScheduleModel getUserScheduleFF(){
   ///
   MyScheduleModel mySchedule = LocalDbC.mySchedulesBox.get(UserC.globalUser!.username);
+  ///
+  debugPrint(mySchedule.monday);
   ///
   return mySchedule;
 }
@@ -67,6 +73,10 @@ void changeDayScheduleFF(MyScheduleModel mySchedule){
               if(mySchedule.sunday != free){
                 ///
                 mySchedule.isAvailable = false;
+                ///
+                LocalDbC.mySchedulesBox.put(UserC.globalUser!.username, mySchedule);
+                ///
+                return;
               }
             }
           }
@@ -75,7 +85,48 @@ void changeDayScheduleFF(MyScheduleModel mySchedule){
     }
   }
   ///
+  mySchedule.isAvailable = true;
+  ///
   LocalDbC.mySchedulesBox.put(UserC.globalUser!.username, mySchedule);
+  ///
+  MyScheduleModel test = LocalDbC.mySchedulesBox.get(UserC.globalUser!.username);
+  ///
+  debugPrint(test.monday);
+
+}
+///
+void changeDayScheduleFF2(MyScheduleModel mySchedule) async{
+  ///
+  if(mySchedule.monday != free){
+    ///
+    if(mySchedule.tuesday != free){
+      ///
+      if(mySchedule.wednesday != free){
+        ///
+        if(mySchedule.thursday != free){
+          ///
+          if(mySchedule.friday != free){
+            ///
+            if(mySchedule.saturday != free){
+              ///
+              if(mySchedule.sunday != free){
+                ///
+                mySchedule.isAvailable = false;
+                ///
+                await LocalDbC.mySchedulesBox.put(mySchedule.ownerUserName, mySchedule);
+                ///
+                return;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ///
+  mySchedule.isAvailable = true;
+  ///
+  LocalDbC.mySchedulesBox.put(mySchedule.ownerUserName, mySchedule);
   ///
 }
 

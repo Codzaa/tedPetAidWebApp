@@ -25,6 +25,7 @@ class LocalDbC {
     Hive.registerAdapter(MyPetModelAdapter());
     Hive.registerAdapter(MyScheduleModelAdapter());
     Hive.registerAdapter(MyTemporaryCarerModelAdapter());
+    Hive.registerAdapter(MyDateModelAdapter());
     //--
   }
   /// Hive Box for Local Account
@@ -38,6 +39,8 @@ class LocalDbC {
   /// Hive Box for Temporary Carers
   static late Box myTempCarersBox;
   ///
+  static late Box myDatesBox;
+  ///
   static openAllBoxes() async {
     ///
     myAccountsBox = await Hive.openBox('_MY_ACCOUNTS');
@@ -45,6 +48,7 @@ class LocalDbC {
     myPetsBox = await Hive.openBox('_MY_PETS');
     mySchedulesBox = await Hive.openBox('_MY_SCHEDULES');
     myTempCarersBox = await Hive.openBox('_MY_TEMP_CARERS');
+    myDatesBox = await Hive.openBox('_MY_DATES');
     ///
     debugPrint("Opened Boxes");
     ///
