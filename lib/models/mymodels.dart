@@ -164,12 +164,6 @@ class MyTemporaryCarerModel {
   });
 //-
 }
-
-
-// BEGIN TO DO
-
-/*
-
 ///
 @HiveType(typeId: 4)
 class MyDateModel {
@@ -185,19 +179,18 @@ class MyDateModel {
   @HiveField(4)
   String petName;
   @HiveField(5)
-  String location
+  String location;
+  @HiveField(6)
+  String petDetails;
 
-  MyTemporaryCarerModel({
+  MyDateModel({
     required this.id,
     required this.day,
     required this.carerUsername,
     required this.ownerUsername,
     required this.petName,
-    required this.carerUserName,
-    required this.location
+    required this.location,
+    required this.petDetails
   });
 //-
 }
-*/
-
-// END TO DO

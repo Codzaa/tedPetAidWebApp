@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:petmutualaid/services/constants.dart';
 import 'package:petmutualaid/ui/carers/all_carers.dart';
+import 'package:petmutualaid/ui/carers/available_carers.dart';
+import 'package:petmutualaid/ui/carers/my_schedule.dart';
 import 'package:petmutualaid/ui/pets/add_pet.dart';
 import 'package:petmutualaid/ui/pets/all_pets.dart';
 import 'package:petmutualaid/ui/pets/my_pets.dart';
@@ -26,7 +28,30 @@ class _HomeUIState extends State<HomeUI> {
     ///
     AllPetsUI(),
     ///
+    /// This page will have all available Carers
+    /// If you click on a user it will open their schedule page
+    /// you can click on the days you want , that are free on their schedule.
+    /// Once clicked you can click book
+    /// The user will recieve a notice on their HOME Dates
+    /// ONCE a user is Booked on a specific day they can not be booked by another person until the week ends.
+    AvailCarersUI(),
+    ///
+    /// This page will have a grid view of dates, 3 along the x axis
+    /// When you tap on a day once its now free.
+    /// If you tap again it becomes unavailable.
+    /// A day can be also BOOKED, when a user accepts a pet date.
+    /// By default a user is free on all days.
+    MyScheduleUI(),
+    ///
+    /// These page has 4 sub pages in the form of tabs.
+    /// 1st Tab shows HOME dates
+    /// 2nd Tab shows AWAY dates
+    /// DatesUI(),
+    /// Shows current logged in user's Profile
+    /// MyProfile ()
+    /// 
     MyPetsUI(),
+    ///
   ];
 
   ///
@@ -41,6 +66,11 @@ class _HomeUIState extends State<HomeUI> {
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Carers',
+            backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.schedule),
             label: 'Schedule',
             backgroundColor: Colors.green,
@@ -48,11 +78,6 @@ class _HomeUIState extends State<HomeUI> {
           BottomNavigationBarItem(
             icon: Icon(Icons.pets),
             label: 'My Pets',
-            backgroundColor: Colors.green,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Me',
             backgroundColor: Colors.green,
           ),
         ],

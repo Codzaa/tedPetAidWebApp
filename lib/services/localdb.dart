@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:petmutualaid/models/mymodels.dart';
+import 'package:petmutualaid/services/authservice.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
 
@@ -116,13 +117,26 @@ class LocalDbC {
       ///
       myUsersBox.put(user1.username, user1);
       ///
+      createDummySchedulesF(user1);
+      ///
       myUsersBox.put(user2.username, user2);
       ///
+      createDummySchedulesF(user2);
+      ///
       myUsersBox.put(user3.username, user3);
+      ///
+      createDummySchedulesF(user3);
+      ///
     } catch(e){
       ///
       debugPrint("DUM STUFF");
     }
+    ///
+  }
+  ///
+  static createDummySchedulesF(MyUserModel myUser) async{
+    ///
+    createDefaultScheduleF(myUser);
     ///
   }
   ///

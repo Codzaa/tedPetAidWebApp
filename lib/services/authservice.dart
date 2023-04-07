@@ -21,6 +21,8 @@ String signUpF(
   myUser.id = uuid.v1();
   /// Save the User to the Database
   LocalDbC.myUsersBox.put(myUser.username, myUser);
+  /// Create Dafault Schedule for the new user
+  createDefaultScheduleF(myUser);
   /// Set the Global User
   UserC.globalUser = myUser;
   /// Return the success message
@@ -59,4 +61,26 @@ bool userExist(username){
   }
   //
   return false;
+}
+///
+/// Function/Method to create the user's default Schedule
+void createDefaultScheduleF(MyUserModel myUser){
+  ///
+  var uuid = const Uuid();
+  ///
+  MyScheduleModel mySchedule = MyScheduleModel(
+    id: uuid.v4(), 
+    ownerUserName: myUser.username, 
+    monday: free, 
+    tuesday: free, 
+    wednesday: free, 
+    thursday: free, 
+    friday: free, 
+    saturday: free, 
+    sunday: free, 
+    isAvailable: true
+    );
+  /// Save the Schedule to the Database
+  LocalDbC.mySchedulesBox.put(myUser.username, mySchedule);
+  
 }

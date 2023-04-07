@@ -33,6 +33,7 @@ class _AvailCarersUIState extends State<AvailCarersUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar() ,
         body: MasonryGridView.count(
             crossAxisCount: 2,
             mainAxisSpacing: 4,
@@ -40,10 +41,19 @@ class _AvailCarersUIState extends State<AvailCarersUI> {
             itemCount: people.length,
             itemBuilder: (BuildContext context,int index){
               return GestureDetector(
-                  onTap: (){},
+                  onTap: (){
+                    /// Carer Schedule
+                    
+                    ///
+                  },
                   child: Image.memory(people[index].selfiePic));
             }
         )
     );
   }
 }
+
+/*
+
+
+*/
