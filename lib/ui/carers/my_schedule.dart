@@ -140,156 +140,169 @@ class _MyScheduleUIState extends State<MyScheduleUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: GridView.count(
-            primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 3,
-            mainAxisSpacing: 3,
-            crossAxisCount: 3,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  ///
-                  mySchedule.monday = changeValueOfDateF(mySchedule.monday,1);
-                  ///
-                  changeDayScheduleFF(mySchedule);
-                  ///
-                  setState(() {});
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: dayColourMonday,
-                  child: Column(
-                    children: [
-                      const Text(monday),
-                      Text(mySchedule.monday),
-                    ],
-                  )
-                ),
+      appBar: AppBar(
+        title: Column(
+          children: const [
+            Center(child: Text("Schedule Page")),
+            Center(child: Text("Click on a Day")),
+          ],
+        ),
+        backgroundColor: Colors.green,
+      ),
+      body: Center(
+        child: FractionallySizedBox(
+          widthFactor: 0.6,
+          child: GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                crossAxisSpacing: 3,
+                mainAxisSpacing: 3,
+                crossAxisCount: 3,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      ///
+                      mySchedule.monday = changeValueOfDateF(mySchedule.monday,1);
+                      ///
+                      changeDayScheduleFF(mySchedule);
+                      ///
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: dayColourMonday,
+                      child: Column(
+                        children: [
+                          const Text(monday),
+                          Text(mySchedule.monday),
+                        ],
+                      )
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      ///
+                      mySchedule.tuesday = changeValueOfDateF(mySchedule.tuesday,2);
+                      ///
+                      changeDayScheduleFF(mySchedule);
+                      ///
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: dayColourTuesday,
+                      child: Column(
+                        children: [
+                          const Text(tuesday),
+                          Text(mySchedule.tuesday),
+                        ],
+                      )
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      ///
+                      mySchedule.wednesday = changeValueOfDateF(mySchedule.wednesday,3);
+                      ///
+                      changeDayScheduleFF(mySchedule);
+                      ///
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: dayColourWednesday,
+                      child: Column(
+                        children: [
+                          const Text(wednesday),
+                          Text(mySchedule.wednesday),
+                        ],
+                      )
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      ///
+                      mySchedule.thursday = changeValueOfDateF(mySchedule.thursday,4);
+                      ///
+                      changeDayScheduleFF(mySchedule);
+                      ///
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: dayColourThursday,
+                      child: Column(
+                        children: [
+                          const Text(thursday),
+                          Text(mySchedule.thursday),
+                        ],
+                      )
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      ///
+                      mySchedule.friday = changeValueOfDateF(mySchedule.friday,5);
+                      ///
+                      changeDayScheduleFF(mySchedule);
+                      ///
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: dayColourFriday,
+                      child: Column(
+                        children: [
+                          const Text(friday),
+                          Text(mySchedule.friday),
+                        ],
+                      )
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      ///
+                      mySchedule.saturday = changeValueOfDateF(mySchedule.saturday,6);
+                      ///
+                      changeDayScheduleFF(mySchedule);
+                      ///
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: dayColourSaturday,
+                      child: Column(
+                        children: [
+                          const Text(saturday),
+                          Text(mySchedule.saturday),
+                        ],
+                      )
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      ///
+                      mySchedule.sunday = changeValueOfDateF(mySchedule.sunday,7);
+                      ///
+                      changeDayScheduleFF(mySchedule);
+                      ///
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      color: dayColourSunday,
+                      child: Column(
+                        children:[
+                          const Text(sunday),
+                          Text(mySchedule.sunday),
+                        ],
+                      )
+                    ),
+                  ),
+                ],
               ),
-              GestureDetector(
-                onTap: (){
-                  ///
-                  mySchedule.tuesday = changeValueOfDateF(mySchedule.tuesday,2);
-                  ///
-                  changeDayScheduleFF(mySchedule);
-                  ///
-                  setState(() {});
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: dayColourTuesday,
-                  child: Column(
-                    children: [
-                      const Text(tuesday),
-                      Text(mySchedule.tuesday),
-                    ],
-                  )
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  ///
-                  mySchedule.wednesday = changeValueOfDateF(mySchedule.wednesday,3);
-                  ///
-                  changeDayScheduleFF(mySchedule);
-                  ///
-                  setState(() {});
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: dayColourWednesday,
-                  child: Column(
-                    children: [
-                      const Text(wednesday),
-                      Text(mySchedule.wednesday),
-                    ],
-                  )
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  ///
-                  mySchedule.thursday = changeValueOfDateF(mySchedule.thursday,4);
-                  ///
-                  changeDayScheduleFF(mySchedule);
-                  ///
-                  setState(() {});
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: dayColourThursday,
-                  child: Column(
-                    children: [
-                      const Text(thursday),
-                      Text(mySchedule.thursday),
-                    ],
-                  )
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  ///
-                  mySchedule.friday = changeValueOfDateF(mySchedule.friday,5);
-                  ///
-                  changeDayScheduleFF(mySchedule);
-                  ///
-                  setState(() {});
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: dayColourFriday,
-                  child: Column(
-                    children: [
-                      const Text(friday),
-                      Text(mySchedule.friday),
-                    ],
-                  )
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  ///
-                  mySchedule.saturday = changeValueOfDateF(mySchedule.saturday,6);
-                  ///
-                  changeDayScheduleFF(mySchedule);
-                  ///
-                  setState(() {});
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: dayColourSaturday,
-                  child: Column(
-                    children: [
-                      const Text(saturday),
-                      Text(mySchedule.saturday),
-                    ],
-                  )
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  ///
-                  mySchedule.sunday = changeValueOfDateF(mySchedule.sunday,7);
-                  ///
-                  changeDayScheduleFF(mySchedule);
-                  ///
-                  setState(() {});
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  color: dayColourSunday,
-                  child: Column(
-                    children:[
-                      const Text(sunday),
-                      Text(mySchedule.sunday),
-                    ],
-                  )
-                ),
-              ),
-            ],
-          )
+        ),
+      )
     );
   }
 

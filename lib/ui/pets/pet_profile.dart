@@ -55,25 +55,55 @@ class _PetProfileUIState extends State<PetProfileUI> {
         actions: [
           IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_back))
         ],
+        backgroundColor: Colors.green,
       ),
-      body: Column(
-        children: [
-          Text(widget.myPet.name),
-          CarouselSlider(
-            items: [
-              Image.memory(widget.myPet.selfiePic),
-              Image.memory(widget.myPet.selfiePic2)
-            ],
-            carouselController: _controller,
-            options: CarouselOptions(
-              autoPlay: true,
-              enlargeCenterPage: true,
-              viewportFraction: 0.9,
-              aspectRatio: 2.0,
-              initialPage: 2,
+      body: ListView(
+        children:[ Center(
+          child: FractionallySizedBox(
+            widthFactor: 0.63,
+            child: Card(
+              child: Column(
+                children: [
+                  ListTile(
+                leading: const Icon(Icons.album),
+                title: const Text("Name:"),
+                subtitle: Text(widget.myPet.name),
+              ),
+              ListTile(
+                leading: const Icon(Icons.album),
+                title: const Text("Age"),
+                subtitle: Text(widget.myPet.age),
+              ),
+              ListTile(
+                leading: const Icon(Icons.album),
+                title: const Text("Specis"),
+                subtitle: Text(widget.myPet.type),
+              ),
+              ListTile(
+                leading: const Icon(Icons.album),
+                title: const Text("Owner"),
+                subtitle: Text(widget.myPet.ownerUserName),
+              )
+                  ,
+                  CarouselSlider(
+                    items: [
+                      Image.memory(widget.myPet.selfiePic),
+                      Image.memory(widget.myPet.selfiePic2)
+                    ],
+                    carouselController: _controller,
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      enlargeCenterPage: true,
+                      viewportFraction: 0.9,
+                      aspectRatio: 2.0,
+                      initialPage: 2,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ],
+        ),]
       ),
     );
   }

@@ -30,11 +30,11 @@ class _signUpUIState extends State<signUpUI> {
   TextEditingController sexController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   ///
-  Uint8List selfieFileUrl = Uint8List(128);
+  Uint8List selfieFileUrl = Uint8List(1);
   ///
-  Uint8List houseFileUrl = Uint8List(128);
+  Uint8List houseFileUrl = Uint8List(1);
   ///
-  Uint8List petShelterFileUrl = Uint8List(128);
+  Uint8List petShelterFileUrl = Uint8List(1);
   ///
   bool selfieLoaded = false;
   bool housePicLoaded = false ;
@@ -116,13 +116,12 @@ class _signUpUIState extends State<signUpUI> {
     }
   }
 
-  // Function/Method to check if the Pictures have been uploaded
+  /// Function/Method to check if the Pictures have been uploaded
   bool checkPicturesF(){
-
-    //
-    if(selfieFileUrl != ""){
-      if(houseFileUrl != ""){
-        if(petShelterFileUrl != ""){
+    ///
+    if(selfieFileUrl.length > 1){
+      if(houseFileUrl.length > 1){
+        if(petShelterFileUrl.length > 1){
             return true;
         }
       }
@@ -138,6 +137,7 @@ class _signUpUIState extends State<signUpUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: const Text("Sign Up"),
         actions: [
           Padding(
@@ -174,180 +174,183 @@ class _signUpUIState extends State<signUpUI> {
       ),
       body: ListView(
         children: [
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: usernameController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Email"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: passwordController,
-                      obscureText: false,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Password"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: nameController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Full Name"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your name';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: nationalIdController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "National Id"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your national id';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: cityController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "City"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your city';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: addressController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Address"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your address';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: sexController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Gender"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your gender';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: ageController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Age"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your age';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
-                    child: Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          pickSelfie();
+          FractionallySizedBox(
+            widthFactor: 0.65,
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: usernameController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Email"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
                         },
-                        child: const Text('Choose Selfie'),
                       ),
                     ),
-                  ),
-                  selfieLoaded ? Image.memory(
-                      selfieFileUrl,
-                  ): const SizedBox(),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
-                    child: Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          pickHousePic();
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: passwordController,
+                        obscureText: false,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Password"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
                         },
-                        child: const Text('Choose House Picture'),
                       ),
                     ),
-                  ),
-                  housePicLoaded ? Image.memory(
-                    houseFileUrl,
-                  ): const SizedBox(),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
-                    child: Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          pickPetShelter();
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Full Name"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                          return null;
                         },
-                        child: const Text('Choose House Picture'),
                       ),
                     ),
-                  ),
-                  petShelterLoaded ? Image.memory(
-                    petShelterFileUrl
-                  ): const SizedBox(),
-                ],
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: nationalIdController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "National Id"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your national id';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: cityController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "City"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your city';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: addressController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Address"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your address';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: sexController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Gender"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your gender';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: ageController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Age"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your age';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
+                      child: Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            pickSelfie();
+                          },
+                          child: const Text('Choose Selfie'),
+                        ),
+                      ),
+                    ),
+                    selfieLoaded ? Image.memory(
+                        selfieFileUrl,
+                    ): const SizedBox(),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
+                      child: Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            pickHousePic();
+                          },
+                          child: const Text('Choose House Picture'),
+                        ),
+                      ),
+                    ),
+                    housePicLoaded ? Image.memory(
+                      houseFileUrl,
+                    ): const SizedBox(),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
+                      child: Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            pickPetShelter();
+                          },
+                          child: const Text('Choose House Picture'),
+                        ),
+                      ),
+                    ),
+                    petShelterLoaded ? Image.memory(
+                      petShelterFileUrl
+                    ): const SizedBox(),
+                  ],
+                ),
               ),
             ),
           ),

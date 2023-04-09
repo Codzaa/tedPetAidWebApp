@@ -112,6 +112,7 @@ class _AddDateUIState extends State<AddDateUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         actions: [
           TextButton.icon(
             onPressed: (){
@@ -124,14 +125,36 @@ class _AddDateUIState extends State<AddDateUI> {
             )
         ],
       ),
-      body: stuffLoaded ? Column(
-        children: [
-          Text("Day : $textDay"),
-          myPetsDropdown(),
-          Text("Name : ${widget.carerProfile.name}"),
-          Text("location : ${widget.carerProfile.city}, ${widget.carerProfile.address}"),
-          myForm()
-        ],
+      body: stuffLoaded ? Center(
+        child: FractionallySizedBox(
+          widthFactor: 0.65,
+          child: Card(
+            child: Column(
+              children: [
+                ListTile(
+                    leading: const Icon(Icons.album),
+                    title: const Text("Day"),
+                    subtitle: Text(textDay),
+                  ),
+                const ListTile(
+                    title:Text("Pet"),
+                  ),
+                myPetsDropdown(),
+                ListTile(
+                    leading: const Icon(Icons.album),
+                    title: const Text("Carer Name"),
+                    subtitle: Text(widget.carerProfile.name),
+                  ),
+                ListTile(
+                    leading: const Icon(Icons.album),
+                    title: const Text("Location"),
+                    subtitle: Text("${widget.carerProfile.city} ${widget.carerProfile.address}"),
+                  ),
+                myForm()
+              ],
+            ),
+          ),
+        ),
       ) : Column(),
     );
   }

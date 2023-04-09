@@ -24,9 +24,9 @@ class _AddPetUIState extends State<AddPetUI> {
   TextEditingController ageController = TextEditingController();
   TextEditingController ownerUsernameController = TextEditingController();
   ///
-  Uint8List selfieFileUrl  = Uint8List(128);
+  Uint8List selfieFileUrl  = Uint8List(1);
   ///
-  Uint8List selfie2FileUrl  = Uint8List(128);
+  Uint8List selfie2FileUrl  = Uint8List(1);
   ///
   bool selfieLoaded = false;
   ///
@@ -91,12 +91,11 @@ class _AddPetUIState extends State<AddPetUI> {
       );
     }
   }
-
-  // Function/Method to check if the Pictures have been uploaded
+  /// Function/Method to check if the Pictures have been uploaded
   bool checkPicturesF(){
     ///
-    if(selfieFileUrl != []){
-      if(selfie2FileUrl != []){
+    if(selfieFileUrl.length > 1){
+      if(selfie2FileUrl.length > 1){
         return true;
       }
     }
@@ -108,19 +107,34 @@ class _AddPetUIState extends State<AddPetUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: const Text("Add Pet"),
         actions: [
           Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: TextButton(onPressed: () {
-                bool result = checkPicturesF();
-                if(!result){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Please Upload all Pet Pictures")),
-                  );
+                ///
+                if (_formKey.currentState!.validate()){
+                  ///
+                  if(checkPicturesF()){
+                    ///
+                    addPetF();
+                    ///
+                  }else{
+                    ///
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Please Upload all Pet Pictures")),
+                    );
+                    ///
+                  }
                 }else{
-                  addPetF();
+                  ///
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please fill input')),
+                  );
+                  ///
                 }
+                
               },child:const Text("SAVE",style: TextStyle(color: Colors.white),))
           ),
           Padding(
@@ -133,89 +147,107 @@ class _AddPetUIState extends State<AddPetUI> {
       ),
       body: ListView(
         children: [
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: nameController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Name"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter pet name';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: typeController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Species"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please Pet Species';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: sexController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(), labelText: "Gender"),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter pet Gender';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
-                    child: Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          pickSelfiePic();
+          FractionallySizedBox(
+            widthFactor: 0.62,
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Name"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter pet name';
+                          }
+                          return null;
                         },
-                        child: const Text('Choose Selfie'),
                       ),
                     ),
-                  ),
-                  selfieLoaded ? Image.memory(
-                    selfieFileUrl,
-                  ): const SizedBox(),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
-                    child: Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          pickSelfie2Pic();
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: typeController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Species"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Pet Species';
+                          }
+                          return null;
                         },
-                        child: const Text('Choose House Picture'),
                       ),
                     ),
-                  ),
-                 selfie2Loaded ? Image.memory(
-                    selfie2FileUrl,
-                  ): const SizedBox(),
-                ],
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: sexController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Gender"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter pet Gender';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: TextFormField(
+                        controller: ageController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: "Age"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter pet Age';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
+                      child: Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            pickSelfiePic();
+                          },
+                          child: const Text('Choose Selfie'),
+                        ),
+                      ),
+                    ),
+                    selfieLoaded ? Image.memory(
+                      selfieFileUrl,
+                    ): const SizedBox(),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
+                      child: Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            pickSelfie2Pic();
+                          },
+                          child: const Text('Choose House Picture'),
+                        ),
+                      ),
+                    ),
+                   selfie2Loaded ? Image.memory(
+                      selfie2FileUrl,
+                    ): const SizedBox(),
+                  ],
+                ),
               ),
             ),
           ),

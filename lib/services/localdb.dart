@@ -156,6 +156,18 @@ class LocalDbC {
     ///
     var selfiePic1 = response.bodyBytes;
     ///
+    response = await http.get(
+      Uri.parse('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1686&q=80'),
+    );
+    ///
+    var selfiePic2 = response.bodyBytes;
+    ///
+    response = await http.get(
+      Uri.parse('https://images.unsplash.com/photo-1577099608295-f11bbd6fed32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'),
+    );
+    ///
+    var selfiePic3 = response.bodyBytes;
+    ///
     MyPetModel pet1 = MyPetModel(
         id: uuid.v4(),
         name: petName,
@@ -184,11 +196,62 @@ class LocalDbC {
         passedAway: "NO"
     );
     ///
+    petName ="Yellow(James)";
+    ///
+    MyPetModel pet3 = MyPetModel(
+        id: uuid.v4(),
+        name: petName,
+        type: "Cat",
+        sex: "Female",
+        selfiePic: selfiePic2,
+        selfiePic2: selfiePic2,
+        diet: "Jelly Babies",
+        age: "5 years",
+        ownerUserName: "James",
+        passedAway: "NO"
+    );
+    ///
+    petName ="George(Sarah)";
+    ///
+    MyPetModel pet4 = MyPetModel(
+        id: uuid.v4(),
+        name: petName,
+        type: "Hoppy",
+        sex: "Male",
+        selfiePic: selfiePic3,
+        selfiePic2: selfiePic3,
+        diet: "Jelly Babies",
+        age: "5 years",
+        ownerUserName: "Sarah",
+        passedAway: "NO"
+    );
+    ///
+    petName ="Looper(Moses)";
+    ///
+    MyPetModel pet5 = MyPetModel(
+        id: uuid.v4(),
+        name: petName,
+        type: "Dog",
+        sex: "Male",
+        selfiePic: selfiePic2,
+        selfiePic2: selfiePic2,
+        diet: "Jelly Babies",
+        age: "5 years",
+        ownerUserName: "Moses",
+        passedAway: "NO"
+    );
+    ///
     try{
       ///
       myPetsBox.put(pet1.name, pet1);
       ///
       myPetsBox.put(pet2.name, pet2);
+      ///
+      myPetsBox.put(pet3.name,pet3);
+      ///
+      myPetsBox.put(pet4.name, pet4);
+      ///
+      myPetsBox.put(pet5.name, pet5);
       ///
     } catch(e){
       ///

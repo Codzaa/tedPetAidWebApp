@@ -37,6 +37,7 @@ class _MyPetsUIState extends State<MyPetsUI> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: const Center(child: Text("My Pets")),
           actions: [
             Padding(
                 padding: const EdgeInsets.only(right: 20.0),
@@ -45,27 +46,39 @@ class _MyPetsUIState extends State<MyPetsUI> {
                 },child:const Text("ADD PET",style: TextStyle(color: Colors.white),))
             ),
           ],
+          backgroundColor: Colors.green,
         ),
-        body: MasonryGridView.count(
-            crossAxisCount: 1,
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 4,
-            itemCount: pets.length,
-            itemBuilder: (BuildContext context,int index){
-              return GestureDetector(
-                  onTap: (){},
-                  child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => PetProfileUI(myPet: pets[index])));
-                    },
-                    child: Column(
-                      children: [
-                        Text(pets[index].name),
-                        Image.memory(pets[index].selfiePic),
-                      ],
-                    ),
-                  ));
-            }
+        body: Center(
+          child: FractionallySizedBox(
+            widthFactor: 0.64,
+            child: MasonryGridView.count(
+                crossAxisCount: 3,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+                itemCount: pets.length,
+                itemBuilder: (BuildContext context,int index){
+                  return GestureDetector(
+                      onTap: (){},
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => PetProfileUI(myPet: pets[index])));
+                        },
+                        child: Card(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                  leading: const Icon(Icons.album),
+                                  title: const Text("Name"),
+                                  subtitle: Text(pets[index].name),
+                                ),
+                              Image.memory(pets[index].selfiePic),
+                            ],
+                          ),
+                        ),
+                      ));
+                }
+            ),
+          ),
         )
     );
   }

@@ -35,29 +35,59 @@ class _AvailCarersUIState extends State<AvailCarersUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar() ,
-        body: MasonryGridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 4,
-            itemCount: people.length,
-            itemBuilder: (BuildContext context,int index){
-              return GestureDetector(
-                  onTap: (){
-                    /// Carer Schedule
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => CarerSchedUI(carer: people[index])));
-                    ///
-                  },
-                  child: Column(
-                    children: [
-                      Text(people[index].name),
-                      Image.memory(people[index].selfiePic),
-                    ],
-                  ));
-            }
+        appBar: AppBar(
+        title: Column(
+          children: const [
+            Center(child: Text("Available Carers")),
+            Center(child: Text("Here you can find all the avaialable people who can take care of your pets")),
+          ],
+        ),
+        backgroundColor: Colors.green,
+      ),
+        body: Center(
+          child: FractionallySizedBox(
+            widthFactor: 0.64,
+            child: MasonryGridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+                itemCount: people.length,
+                itemBuilder: (BuildContext context,int index){
+                  return GestureDetector(
+                      onTap: (){
+                        /// Carer Schedule
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => CarerSchedUI(carer: people[index])));
+                        ///
+                      },
+                      child: Column(
+                        children: [
+                          Card(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  leading: const Icon(Icons.album),
+                                  title: const Text("Name"),
+                                  subtitle: Text(people[index].name),
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.album),
+                                  title: const Text("Address"),
+                                  subtitle: Text("${people[index].city} ${people[index].address}"),
+                                ),
+                                Image.memory(people[index].selfiePic),
+                              ],
+                            ),
+                          ),
+  
+                          
+                        ],
+                      ));
+                }
+            ),
+          ),
         )
     );
   }

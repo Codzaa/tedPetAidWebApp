@@ -26,7 +26,8 @@ class _MyDatesUIState extends State<MyDatesUI> {
                   icon: Icon(Icons.train))
               ],
             ),
-            title: const Text('My Dates'),
+            title: const Text('Pet Dates'),
+            backgroundColor: Colors.green,
           ),
           body: const TabBarView(
             children: [

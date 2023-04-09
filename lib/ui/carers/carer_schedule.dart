@@ -103,7 +103,10 @@ class _CarerSchedUIState extends State<CarerSchedUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Center(child: Text("Pick a Date you want ${widget.carer.name} to take of your Pet")),
+      ),
       body: gotCarer ? GridView.count(
             primary: false,
             padding: const EdgeInsets.all(20),
